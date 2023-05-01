@@ -6,4 +6,13 @@ export const signIn = (name) => {
       }
     };
   };
+
+export const logout = (name) => {
+    return {
+      type: 'LOGOUT',
+      payload: {
+        name: name
+      }
+    };
+  };
   

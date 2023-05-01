@@ -1,11 +1,13 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Image, Button } from 'react-bootstrap';
 import avatar from '../example/avatar.jpeg';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from '../actions/loggedActions';
 
 export default function MyNavbar() {
     const logged = useSelector(state => state.logged);
+    const dispatch = useDispatch()
 
     return (
         <Navbar bg="light" expand="lg">
@@ -14,13 +16,16 @@ export default function MyNavbar() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <div className='float-end'>
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav>
+                        {logged ? (
                             <NavDropdown title={<Image src={avatar} roundedCircle width="50" />} id="basic-nav-dropdown">
                                 <NavDropdown.Item disabled>{logged}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="#">Logout</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => dispatch(logout())}>Logout</NavDropdown.Item>
                             </NavDropdown>
-                        </Nav>
+                        ) : (
+                            <Link to='/login' className='btn btn-primary'>Login</Link>
+                        )}
+
                     </Navbar.Collapse>
                 </div>
             </div>
