@@ -2,6 +2,7 @@ import React from 'react'
 import { Navbar, Nav, NavDropdown, Image } from 'react-bootstrap';
 import avatar from '../example/avatar.jpeg';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function MyNavbar() {
     const logged = useSelector(state => state.logged);
@@ -9,7 +10,7 @@ export default function MyNavbar() {
     return (
         <Navbar bg="light" expand="lg">
             <div className='container d-flex'>
-                <Navbar.Brand href="#">What Digital</Navbar.Brand>
+                <Link to='/' className='attribute'><Navbar.Brand>What Digital</Navbar.Brand></Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <div className='float-end'>
                     <Navbar.Collapse id="basic-navbar-nav">
