@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown, Image, Button } from 'react-bootstrap';
+import { Navbar, NavDropdown, Image } from 'react-bootstrap';
 import avatar from '../example/avatar.jpeg';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';

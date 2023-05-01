@@ -1,9 +1,15 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { signIn } from '../actions/loggedActions';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logged = useSelector(state => state.logged);
+  if(logged) {
+    return navigate('/')
+  };
 
   const handleLogin = (event) => {
     event.preventDefault();

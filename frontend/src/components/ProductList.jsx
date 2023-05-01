@@ -1,7 +1,14 @@
 import React from 'react';
 import { Container, Table, Button, Navbar, Form, FormControl } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function ProductList(props) {
+  const navigate = useNavigate();
+  const logged = useSelector(state => state.logged);
+  if(!logged) {
+    return navigate('/login')
+  };
   const products = [
     { id: 1, name: 'Product 1', description: 'Description 1', price: 10, stock: 5 },
     { id: 2, name: 'Product 2', description: 'Description 2', price: 20, stock: 10 },
