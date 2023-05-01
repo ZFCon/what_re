@@ -13,7 +13,7 @@ function ProductList(props) {
   }
 
   return (
-    <Container className="my-5">
+    <>
       <h1>Product List</h1>
 
       <Navbar bg="light" expand="lg">
@@ -56,7 +56,7 @@ function ProductList(props) {
           ))}
         </tbody>
       </Table>
-    </Container>
+    </>
   );
 }
 

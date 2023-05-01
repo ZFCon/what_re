@@ -1,12 +1,13 @@
 import './App.css';
-import ProductList from './components/ProductList';
-import MyNavbar from './components/MyNavbar';
+import { MyNavbar, ProductList, Login } from './components';
 
 function App() {
   return (
     <div className="App">
       <MyNavbar />
-      <ProductList />
+      <div className='container my-5'>
+        <Login />
+      </div>
     </div>
   );
 }
