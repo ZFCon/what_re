@@ -1,22 +1,25 @@
 import React from 'react';
 import { Container, Table, Button, Navbar, Form, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import axios from 'axios';
+import { fetchProducts } from '../actions/productsActions';
 
 function ProductList(props) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const logged = useSelector(state => state.logged);
   useEffect(() => {
     if (!logged) {
       return navigate('/login')
+    } else {
+      axios.get('http://localhost:8000/api/store/products/').then(response => {
+        dispatch(fetchProducts(response.data));
+      }).catch(error => console.error(error));
     };
   });
-  const products = [
-    { id: 1, name: 'Product 1', description: 'Description 1', price: 10, stock: 5 },
-    { id: 2, name: 'Product 2', description: 'Description 2', price: 20, stock: 10 },
-    { id: 3, name: 'Product 3', description: 'Description 3', price: 30, stock: 15 },
-  ];
+  const products = useSelector(state => state.products);
 
   function handleSelect(product) {
     console.log(`Selected product: ${product.name}`);
