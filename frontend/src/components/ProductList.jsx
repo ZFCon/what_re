@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { fetchProducts } from '../actions/productsActions';
+import { fetchProducts, updateProduct } from '../actions/productsActions';
 
 function ProductList(props) {
   const dispatch = useDispatch();
@@ -25,7 +25,10 @@ function ProductList(props) {
   const products = useSelector(state => state.products);
 
   function handleSelect(product) {
-    console.log(`Selected product: ${product.name}`);
+    const url = `http://localhost:8000/api/store/products/${product.id}/select/?name=${logged}&search=${searchQuery}`;
+    axios.post(url, { "name": logged }).then(response => {
+      dispatch(updateProduct(response.data));
+    }).catch(error => console.error(error));
   }
 
   return (
@@ -66,7 +69,7 @@ function ProductList(props) {
               <td>{product.stock}</td>
               <td>
                 <Button variant="primary" onClick={() => handleSelect(product)}>
-                  Select
+                {product.is_selected ? 'Unselect' : 'Select'}
                 </Button>
               </td>
             </tr>

@@ -6,3 +6,12 @@ export const fetchProducts = (products) => {
     }
   };
 };
+
+export const updateProduct = (product) => {
+  return {
+    type: 'UPDATE_PRODUCT',
+    payload: {
+      product: product,
+    }
+  };
+};
