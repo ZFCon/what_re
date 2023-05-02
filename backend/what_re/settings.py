@@ -130,3 +130,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Cors headers
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# REST API Configrations
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
+}

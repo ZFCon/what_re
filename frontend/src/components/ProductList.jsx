@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Table, Button, Navbar, Form, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { fetchProducts } from '../actions/productsActions';
 
@@ -10,15 +10,18 @@ function ProductList(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logged = useSelector(state => state.logged);
+  const [searchQuery, setSearchQuery] = useState('');
+
   useEffect(() => {
     if (!logged) {
       return navigate('/login')
     } else {
-      axios.get('http://localhost:8000/api/store/products/').then(response => {
+      const url = `http://localhost:8000/api/store/products/?name=${logged}&search=${searchQuery}`;
+      axios.get(url).then(response => {
         dispatch(fetchProducts(response.data));
       }).catch(error => console.error(error));
     };
-  });
+  }, [logged, searchQuery]);
   const products = useSelector(state => state.products);
 
   function handleSelect(product) {
@@ -37,8 +40,9 @@ function ProductList(props) {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={searchQuery}
+              onChange={event => setSearchQuery(event.target.value)}
             />
-            <Button variant="outline-success">Search</Button>
           </Form>
         </Container>
       </Navbar>
