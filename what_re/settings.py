@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -79,13 +80,13 @@ WSGI_APPLICATION = "what_re.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'what_re',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'db',
-        'PORT': '',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "what_re",
+        "USER": "postgres",
+        "PASSWORD": "password",
+        "HOST": "db",
+        "PORT": "",
     }
 }
 
@@ -138,19 +139,18 @@ CORS_ORIGIN_ALLOW_ALL = True
 # REST API Configrations
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': [
-        'rest_framework.filters.SearchFilter',
-        'rest_framework.filters.OrderingFilter',
+    "DEFAULT_FILTER_BACKENDS": [
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
     ],
 }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+    
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "/static/"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
