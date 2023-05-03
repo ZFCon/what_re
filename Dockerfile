@@ -16,7 +16,7 @@ COPY . /code
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port 8000 for the Django app
+# Expose port 80 for the Django app
 EXPOSE 80
 
 # Define the command to run the Django app
