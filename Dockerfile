@@ -17,7 +17,7 @@ COPY . /code
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Expose port 8000 for the Django app
-EXPOSE 8000
+EXPOSE 80
 
 # Define the command to run the Django app
 ENTRYPOINT ["/code/entrypoint.sh"]
