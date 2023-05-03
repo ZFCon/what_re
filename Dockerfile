@@ -16,8 +16,5 @@ COPY . /code
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Collect project static
-RUN python manage.py collectstatic --noinput
-
 # Define the command to run the Django app
 ENTRYPOINT ["/code/entrypoint.sh"]
