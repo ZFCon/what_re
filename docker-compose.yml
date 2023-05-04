@@ -9,18 +9,24 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - database_default
-    links:
-      - "database_default"
+      - db
+    networks:
+      - djangonetwork
 
-  database_default:
+  db:
     image: postgres:13.2-alpine
     environment:
-      POSTGRES_DB: "db"
-      POSTGRES_HOST_AUTH_METHOD: "trust"
-      SERVICE_MANAGER: "fsm-postgres"
+      POSTGRES_DB: what_re
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - djangonetwork
 
 volumes:
   postgres_data:
+
+networks:
+  djangonetwork:
+    driver: bridge

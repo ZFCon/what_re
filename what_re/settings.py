@@ -81,8 +81,16 @@ WSGI_APPLICATION = "what_re.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASE_URL = "postgres://postgres@database_default:5432/db"
-DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "what_re",
+        "USER": "postgres",
+        "PASSWORD": "password",
+        "HOST": "db",
+        "PORT": "",
+    }
+}
 
 
 # Password validation
