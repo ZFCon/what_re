@@ -1,18 +1,12 @@
 #!/bin/bash
 
-# Wait for the PostgreSQL database to be ready
-if [ "$DATABASE" = "$POSTGRES_DB" ]
-then
-    echo "Waiting for postgres..."
+set -e
 
-    while ! nc -z db $POSTGRES_PORT; do
-      sleep 0.1
-    done
-
-    echo "PostgreSQL started"
+if [ "${DIVIO_DB_WAIT}" = "1" ]; then
+    /usr/local/bin/divio-wait-postgres.sh
 fi
 
-# Apply database migrations
+# Run any database migrations
 python manage.py migrate
 
 exec "$@"
