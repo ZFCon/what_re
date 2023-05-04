@@ -18,3 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Define the command to run the Django app
 ENTRYPOINT ["/code/entrypoint.sh"]
+
+# Run project
+
+CMD uwsgi --http=0.0.0.0:80 --module=what_re.wsgi
