@@ -7,6 +7,8 @@ const productsReducer = (state = [], action) => {
             return state.map(product => {
                 if (product.id === action.payload.product.id) {
                     return action.payload.product;
+                } else {
+                    return product;
                 };
             });
         default:

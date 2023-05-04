@@ -16,16 +16,16 @@ function ProductList(props) {
     if (!logged) {
       return navigate('/login')
     } else {
-      const url = `/api/store/products/?name=${logged}&search=${searchQuery}`;
+      const url = `http://127.0.0.1/api/store/products/?name=${logged}&search=${searchQuery}`;
       axios.get(url).then(response => {
         dispatch(fetchProducts(response.data));
       }).catch(error => console.error(error));
     };
-  }, [logged, searchQuery]);
+  }, [logged, searchQuery, navigate, dispatch]);
   const products = useSelector(state => state.products);
 
   function handleSelect(product) {
-    const url = `/api/store/products/${product.id}/select/?name=${logged}&search=${searchQuery}`;
+    const url = `http://127.0.0.1/api/store/products/${product.id}/select/?name=${logged}&search=${searchQuery}`;
     axios.post(url, { "name": logged }).then(response => {
       dispatch(updateProduct(response.data));
     }).catch(error => console.error(error));
